@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.List;
 
 import db.DB;
@@ -104,8 +105,27 @@ public class FornecedorDaoJDBC implements FornecedorDao {
 
 	@Override
 	public Fornecedor findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT * FROM fornecedor WHERE id = ?");
+			st.setInt(1, id);
+			
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Fornecedor forn = instantmentFornecedor(rs);
+				return forn;
+			}
+			return null;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+			DB.colseResultSet(rs);
+		}
 	}
 
 	@Override
@@ -113,5 +133,15 @@ public class FornecedorDaoJDBC implements FornecedorDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private Fornecedor instantmentFornecedor(ResultSet rs) throws SQLException {
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setId(rs.getInt("id"));
+		fornecedor.setNome(rs.getString("Name"));
+		fornecedor.setCnpj(rs.getString("Cnpj"));
+		fornecedor.setEmail(rs.getString("Email"));
+		return fornecedor;
+	}
+	
 
 }

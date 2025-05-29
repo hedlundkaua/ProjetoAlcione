@@ -9,7 +9,6 @@ public class Fornecedor {
 	private String email;
 	
 	public Fornecedor() {
-		
 	}
 
 	public Fornecedor(Integer id, String nome, String cnpj, String email) {

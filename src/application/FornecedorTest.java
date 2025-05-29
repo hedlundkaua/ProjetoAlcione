@@ -2,6 +2,7 @@ package application;
 
 import model.dao.DaoFactory;
 import model.dao.FornecedorDao;
+import model.entities.Fornecedor;
 
 public class FornecedorTest {
 	public static void main(String[] args) {
@@ -23,6 +24,9 @@ public class FornecedorTest {
 		//System.out.println("== Delete Fornecedor ==");
 		//forDao.deleteById(1);
 		
+		System.out.println("== findById Fornecedor ==");
+		Fornecedor newforn = forDao.findById(3);
+		System.out.println(newforn);
 	
 	}
 }
