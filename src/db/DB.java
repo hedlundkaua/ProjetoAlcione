@@ -13,7 +13,7 @@ public class DB {
 	private static Connection conn = null;
 	
 	//conecta com o banco de dados
-	private static Connection getConnection() {
+	public static Connection getConnection() {
 		if(conn == null) {
 			try {
 				Properties props = loadProperties();
