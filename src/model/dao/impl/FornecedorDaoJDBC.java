@@ -43,7 +43,7 @@ public class FornecedorDaoJDBC implements FornecedorDao {
 						int id = rs.getInt(1); //Obtém o valor da primeira coluna de resultSet
 						obj.setId(id); //define o Id do obj
 					}
-					DB.colseResultSet(rs);
+				DB.colseResultSet(rs);
 			}
 		}
 		catch (SQLException e) {
@@ -52,16 +52,32 @@ public class FornecedorDaoJDBC implements FornecedorDao {
 		finally {
 			DB.closeStatment(st);
 		}
-		
-		
 	}
 
 	@Override
 	public void update(Fornecedor obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE fornecedor "
+					+ "SET Name = ?, Cnpj = ?, Email = ? " // UPDATE SET!!!
+					+ "WHERE Id = ?");
+			st.setString(1, obj.getNome());
+			st.setString(2,obj.getCnpj());
+			st.setString(3, obj.getEmail());
+			st.setInt(4, obj.getId()); //Tem que pegar o ID também!!
+			
+			int rowsAffected = st.executeUpdate();		
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+		}
 	}
 
+	
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub

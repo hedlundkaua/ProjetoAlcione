@@ -19,6 +19,8 @@ public class FornecedorTest {
 		//forDao.insert(newForn);
 		//System.out.println(newForn);
 		
-		
+		System.out.println("== Update Fornecedor ==");
+		Fornecedor forNew = new Fornecedor(1, "Hedlund", "12.123.123/0001-12", "matted@gmail.com");
+		forDao.update(forNew);
 	}
 }
