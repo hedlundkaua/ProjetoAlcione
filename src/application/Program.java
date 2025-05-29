@@ -26,7 +26,7 @@ public class Program {
 		//System.out.println("== Delete Cargo ==");
 		//cargoDao.deleteById(2);
 		
-		//System.out.println("== findByIn Cargo ==");
+		//System.out.println("== findById Cargo ==");
 		//Cargo car = cargoDao.findById(1);
 		//System.out.println(car);
 		

@@ -127,7 +127,6 @@ public class CargoDaoJDBC implements CargoDao{
 		}
 	}
 	
-
 	@Override
 	public List<Cargo> findAll() {
 		PreparedStatement st = null;
@@ -154,7 +153,6 @@ public class CargoDaoJDBC implements CargoDao{
 			DB.colseResultSet(rs);
 		}
 	}
-	
 	
 	private Cargo instantiateCargo(ResultSet rs) throws SQLException {
 		Cargo cargo = new Cargo();

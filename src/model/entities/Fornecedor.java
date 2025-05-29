@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Fornecedor {
 	private Integer Id;
 	private String nome;
-	private Integer cnpj;
+	private String cnpj;
 	private String email;
 	
 	public Fornecedor() {
 		
 	}
 
-	public Fornecedor(Integer id, String nome, Integer cnpj, String email) {
+	public Fornecedor(Integer id, String nome, String cnpj, String email) {
 		Id = id;
 		this.nome = nome;
 		this.cnpj = cnpj;
@@ -35,11 +35,11 @@ public class Fornecedor {
 		this.nome = nome;
 	}
 
-	public Integer getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
