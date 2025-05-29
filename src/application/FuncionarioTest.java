@@ -13,11 +13,17 @@ public class FuncionarioTest {
 		
 		FuncionarioDao funcionarioDao = DaoFactory.createFuncionarioDao();
 		
-		Cargo cargo = new Cargo(3, null);
-		Funcionario funcionario = new Funcionario(null, "Edo Bernardo", new Date(11/12/1975) , 2300.0, cargo);
-		funcionarioDao.insert(funcionario);
-		System.out.println(funcionario);
 		
+		
+		
+		//System.out.println("== Insert funcionario ==");
+		//Cargo cargo = new Cargo(1, null);
+		//Funcionario funcionario = new Funcionario(null, "Joao", new Date(11/12/1972) , 1300.0, cargo);
+		//funcionarioDao.insert(funcionario);
+		
+		//System.out.println("== findById Funcionario ==");
+		//Funcionario newfun = funcionarioDao.findById(5);
+		//System.out.println(newfun);
 		
 	}
 }
