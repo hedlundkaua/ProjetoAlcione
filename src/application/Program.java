@@ -1,5 +1,7 @@
 package application;
 
+import java.util.List;
+
 import model.dao.CargoDao;
 import model.dao.DaoFactory;
 import model.entities.Cargo;
@@ -21,11 +23,21 @@ public class Program {
 		//Cargo upCargo = new Cargo(1, "Auxiliar");
 		//cargoDao.update(upCargo);
 		
-		System.out.println("== Delete Cargo ==");
-		cargoDao.deleteById(2);
+		//System.out.println("== Delete Cargo ==");
+		//cargoDao.deleteById(2);
+		
+		//System.out.println("== findByIn Cargo ==");
+		//Cargo car = cargoDao.findById(1);
+		//System.out.println(car);
+		
+		//System.out.println("== findAll Cargo ==");
+		//List<Cargo> all = cargoDao.findAll();
+		//for(Cargo c : all) {
+		//	System.out.println(c);
+		//}
 		
 		
 		
-		
+			
 	}
 }

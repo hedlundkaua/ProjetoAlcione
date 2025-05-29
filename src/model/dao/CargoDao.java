@@ -9,6 +9,6 @@ public interface CargoDao {
 	void insert(Cargo obj);
 	void update(Cargo obj);
 	void deleteById(Integer id);
-	CargoDao findById(Integer id);
-	List<CargoDao> findAll();
+	Cargo findById(Integer id);
+	List<Cargo> findAll();
 }
