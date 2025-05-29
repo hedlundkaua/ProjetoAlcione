@@ -59,14 +59,44 @@ public class CargoDaoJDBC implements CargoDao{
 
 	@Override
 	public void update(Cargo obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+	
+		try {
+			st = conn.prepareStatement(
+					"UPDATE cargo "
+					+ "SET Name = ? "
+					+ "WHERE Id = ?");
+			st.setString(1, obj.getNome());
+			st.setInt(2, obj.getId());
+			
+			int rowsAffected = st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 		
+	
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
 		
+		try {
+			st = conn.prepareStatement(
+					"DELETE "
+					+ "FROM cargo "
+					+ "WHERE id = ? ");
+			st.setInt(1, id);
+			
+			int arrowsAffected = st.executeUpdate();	
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+		}
 	}
 
 	@Override
@@ -80,13 +110,4 @@ public class CargoDaoJDBC implements CargoDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	private Cargo instantiateCargo(ResultSet rs) throws SQLException {
-		Cargo car = new Cargo();
-		car.setId(rs.getInt("id"));
-		car.setNome(rs.getString("Nome"));
-		return car;
-	}
-
 }
