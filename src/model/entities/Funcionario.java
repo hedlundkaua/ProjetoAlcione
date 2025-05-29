@@ -1,10 +1,12 @@
 package model.entities;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Funcionario {
 	private Integer id;
 	private String nome;
+	private Date birthDate;
 	private Double salario;
 	
 	private Cargo cargo;
@@ -12,9 +14,10 @@ public class Funcionario {
 	public Funcionario() {
 	}
 
-	public Funcionario(Integer id, String nome, Double salario, Cargo cargo) {
+	public Funcionario(Integer id, String nome,Date birthDate, Double salario, Cargo cargo) {
 		this.id = id;
 		this.nome = nome;
+		this.birthDate = birthDate;
 		this.salario = salario;
 		this.cargo = cargo;
 	}
@@ -33,6 +36,14 @@ public class Funcionario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public Double getSalario() {
@@ -70,6 +81,6 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario [id=" + id + ", nome=" + nome + ", salario=" + salario + ", cargo=" + cargo + "]";
+		return "Funcionario [id=" + id + ", nome=" + nome + ", BirthDate=" + birthDate + ", salario=" + salario + ", cargo=" + cargo + "]";
 	}
 }

@@ -30,11 +30,11 @@ public class FornecedorTest {
 		//Fornecedor newforn = forDao.findById(3);
 		//System.out.println(newforn);
 	
-		System.out.println("== findAll fornecedor ==");
-		List<Fornecedor> list = forDao.findAll();
-		for(Fornecedor f : list) {
-			System.out.println(f);
-		}
+		//System.out.println("== findAll fornecedor ==");
+		//List<Fornecedor> list = forDao.findAll();
+		//for(Fornecedor f : list) {
+		//	System.out.println(f);
+		//}
 		
 	}
 }
