@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -130,8 +131,30 @@ public class FornecedorDaoJDBC implements FornecedorDao {
 
 	@Override
 	public List<Fornecedor> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"SELECT * FROM fornecedor");
+			rs = st.executeQuery();
+			
+			List<Fornecedor> list = new ArrayList<Fornecedor>();
+			while(rs.next()) {
+				Fornecedor forn = instantmentFornecedor(rs);
+				
+				list.add(forn);
+			}
+			DB.colseResultSet(rs);
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+			DB.colseResultSet(rs);
+		}	
 	}
 	
 	private Fornecedor instantmentFornecedor(ResultSet rs) throws SQLException {
