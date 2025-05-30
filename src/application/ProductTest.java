@@ -33,11 +33,18 @@ public class ProductTest {
 		//	System.out.println(p);
 		//}
 		
-		System.out.println("== findByFornecedor product == ");
-		List<Product> list = productDao.findByFornecedor(fornecedor);
-		for(Product p : list) {
-			System.out.println(p);
-		}
+		//System.out.println("== findByFornecedor product == ");
+		//List<Product> list = productDao.findByFornecedor(fornecedor);
+		//for(Product p : list) {
+		//	System.out.println(p);
+		//}
+		
+		//Product prod = new Product();
+		//System.out.println("== Update product ==");
+		//prod = productDao.findById(3);
+		//prod.setNome("Banana");
+		//productDao.update(prod);
+		
 		
 		
 

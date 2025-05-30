@@ -64,13 +64,33 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public void update(Product obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE product "
+					+ "SET Name = ?, QntdProduct = ?, PrecoProd = ?, ValidadeProd = ?, FornecedorId = ? "
+					+ "WHERE Id = ?");
+			
+			st.setString(1, obj.getNome());
+			st.setInt(2, obj.getQntd());
+			st.setDouble(3, obj.getPreco());
+			st.setDate(4, new Date(obj.getValidade().getTime()));
+			st.setInt(5, obj.getFornecedor().getId());
+			st.setInt(6, obj.getId());
+			
+			int rowsAffected = st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+		}		
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
