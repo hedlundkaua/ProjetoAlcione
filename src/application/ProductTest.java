@@ -19,7 +19,7 @@ public class ProductTest {
 		
 		
 		//System.out.println("== Insert product ==");
-		Fornecedor fornecedor = new Fornecedor(2, null,null, null);
+		//Fornecedor fornecedor = new Fornecedor(2, null,null, null);
 		//Product product = new Product(null, "Maça", 150, 2000.0, new Date(20/06/2025) , fornecedor);
 		//productDao.insert(product);
 		
@@ -45,6 +45,8 @@ public class ProductTest {
 		//prod.setNome("Banana");
 		//productDao.update(prod);
 		
+		//System.out.println("== Delete product ==");
+		//productDao.deleteById(4);
 		
 		
 
