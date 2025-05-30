@@ -3,6 +3,7 @@ package application;
 
 
 import java.util.Date;
+import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.ProductDao;
@@ -18,13 +19,19 @@ public class ProductTest {
 		
 		
 		//System.out.println("== Insert product ==");
-		//Fornecedor fornecedor = new Fornecedor(2, "Matted", "1234", "matted@gmail.com");
-		//Product product = new Product(null, "Massa Isabella", 500, 2000.0, new Date(20/06/2025) , fornecedor);
+		//Fornecedor fornecedor = new Fornecedor(2, null,null, null);
+		//Product product = new Product(null, "Maça", 150, 2000.0, new Date(20/06/2025) , fornecedor);
 		//productDao.insert(product);
 		
 		//System.out.println("== findById product ==");
-		//Product prod = productDao.findById(1);
+		//Product prod = productDao.findById(2);
 		//System.out.println(prod);
+		
+		//System.out.println("\n== findAll Product ==");
+		//List<Product> list = productDao.findAll();
+		//for(Product p : list) {
+		//	System.out.println(p);
+		//}
 		
 		
 

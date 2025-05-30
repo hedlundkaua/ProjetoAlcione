@@ -20,11 +20,11 @@ public class FuncionarioTest {
 		//Funcionario newfun = funcionarioDao.findById(5);
 		//System.out.println(newfun);
 		
-		//System.out.println("== findAll funcionario ==");
-		//List<Funcionario> list = funcionarioDao.findAll();
-		//for(Funcionario f : list) {
-		//	System.out.println(f);
-		//}
+		System.out.println("== findAll funcionario ==");
+		List<Funcionario> list = funcionarioDao.findAll();
+		for(Funcionario f : list) {
+			System.out.println(f);
+		}
 		
 		//System.out.println("== Update funcionario ==");
 		//Funcionario fu = new Funcionario();

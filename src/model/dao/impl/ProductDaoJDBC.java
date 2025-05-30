@@ -6,12 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
 import model.dao.ProductDao;
 import model.entities.Fornecedor;
+import model.entities.Funcionario;
 import model.entities.Product;
 
 public class ProductDaoJDBC implements ProductDao {
@@ -77,7 +81,7 @@ public class ProductDaoJDBC implements ProductDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT product.*, fornecedor.* "
+					"SELECT product.*, fornecedor.name as ByName, fornecedor.* "
 					+ "FROM product INNER JOIN fornecedor "
 					+ "ON product.FornecedorId = fornecedor.id "
 					+ "WHERE product.id = ?");
@@ -99,14 +103,46 @@ public class ProductDaoJDBC implements ProductDao {
 		finally {
 			DB.closeStatment(st);
 			DB.colseResultSet(rs);
-		}
-		
+		}	
 	}
-
 	@Override
 	public List<Product> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT product.* , fornecedor.name AS ByName, fornecedor.* "
+					+ "FROM product INNER JOIN fornecedor "
+					+ "ON product.FornecedorId = fornecedor.id "
+					+ "ORDER BY product.name");
+			
+			rs = st.executeQuery();
+			
+			List<Product> list = new ArrayList<>();
+			Map<Integer, Fornecedor> map = new HashMap<>();
+			
+			while(rs.next()) {
+				
+				Fornecedor fornecedor = map.get(rs.getInt("FornecedorId"));
+				
+				if(fornecedor == null) {
+					fornecedor = instantiateFornecedor(rs);
+					
+					map.put(rs.getInt("FornecedorId"), fornecedor);
+				}
+				
+				Product obj = instantiateProduct(rs, fornecedor);
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+			DB.colseResultSet(rs);
+		}
 	}
 
 	@Override
@@ -129,7 +165,7 @@ public class ProductDaoJDBC implements ProductDao {
 	private Fornecedor instantiateFornecedor(ResultSet rs) throws SQLException {
 		Fornecedor fornecedor = new Fornecedor();
 		fornecedor.setId(rs.getInt("FornecedorId"));
-		fornecedor.setNome(rs.getString("Name"));
+		fornecedor.setNome(rs.getString("ByName"));
 		fornecedor.setCnpj(rs.getString("Cnpj"));
 		fornecedor.setEmail(rs.getString("Email"));
 		return fornecedor;
