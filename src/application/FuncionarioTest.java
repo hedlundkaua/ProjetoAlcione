@@ -26,11 +26,11 @@ public class FuncionarioTest {
 		//	System.out.println(f);
 		//}
 		
-		System.out.println("== Update funcionario ==");
-		Funcionario fu = new Funcionario();
-		fu = funcionarioDao.findById(3);
-		fu.setNome("Luana");
-		funcionarioDao.update(fu);
+		//System.out.println("== Update funcionario ==");
+		//Funcionario fu = new Funcionario();
+		//fu = funcionarioDao.findById(3);
+		//fu.setNome("Luana");
+		//funcionarioDao.update(fu);
 		
 		
 		
