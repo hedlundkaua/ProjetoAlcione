@@ -14,7 +14,7 @@ public class Funcionario {
 	public Funcionario() {
 	}
 
-	public Funcionario(Integer id, String nome,Date birthDate, Double salario, Cargo cargo) {
+	public Funcionario(Integer id, String nome, Date birthDate, Double salario, Cargo cargo) {
 		this.id = id;
 		this.nome = nome;
 		this.birthDate = birthDate;

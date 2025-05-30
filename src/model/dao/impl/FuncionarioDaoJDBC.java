@@ -64,8 +64,28 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 
 	@Override
 	public void update(Funcionario obj) {
-		// TODO Auto-generated method stub
-		
+
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE funcionario "
+					+ "SET Name = ?, BirthDate = ?, baseSalary = ?, CargoId = ? "
+					+ "WHERE Id = ?");
+			
+			st.setString(1, obj.getNome());
+			st.setDate(2, new Date(obj.getBirthDate().getTime()));
+			st.setDouble(3, obj.getSalario());
+			st.setInt(4, obj.getCargo().getId());
+			st.setInt(5, obj.getId());
+			
+			int rows = st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+		}	
 	}
 
 	@Override
@@ -114,9 +134,9 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT funcionario.*, cargo.name as CagName "
-					+ "FROM funcionario INNER JOIN cargo"
-					+ "ON funcionario.CargoId = cargo.id"
+					"SELECT funcionario.*, cargo.name as CarName "
+					+ "FROM funcionario INNER JOIN cargo "
+					+ "ON funcionario.CargoId = cargo.id "
 					+ "ORDER BY Name ");
 		
 			rs = st.executeQuery();
@@ -125,7 +145,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 			Map<Integer, Cargo> map = new HashMap<>();
 			
 			while(rs.next()) {
-				Cargo cargo = map.get(rs.getInt("CargoId"));
+				Cargo cargo = map.get(rs.getInt("id"));
 				
 				if(cargo == null) {
 					cargo = instantiateCargo(rs);
