@@ -35,8 +35,6 @@ public class FuncionarioTest {
 		//System.out.println("== Delete funcionario ==");
 		//funcionarioDao.deleteById(2);	
 		
-
-		System.out.println("Hello!");
-
+		
 	}
 }

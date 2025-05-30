@@ -64,7 +64,6 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 
 	@Override
 	public void update(Funcionario obj) {
-
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(

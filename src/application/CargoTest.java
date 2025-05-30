@@ -6,7 +6,7 @@ import model.dao.CargoDao;
 import model.dao.DaoFactory;
 import model.entities.Cargo;
 
-public class Program {
+public class CargoTest {
 	public static void main(String[] args) {
 		
 		
