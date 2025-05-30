@@ -15,7 +15,6 @@ import db.DB;
 import db.DbException;
 import model.dao.ProductDao;
 import model.entities.Fornecedor;
-import model.entities.Funcionario;
 import model.entities.Product;
 
 public class ProductDaoJDBC implements ProductDao {
@@ -147,8 +146,43 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public List<Product> findByFornecedor(Fornecedor obj) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT product.* , fornecedor.name as ByName, fornecedor.* "
+					+ "FROM product INNER JOIN fornecedor "
+					+ "ON product.FornecedorId = fornecedor.id "
+					+ "WHERE FornecedorId = ?");
+
+			st.setInt(1, obj.getId());
+			rs = st.executeQuery();
+			
+			List<Product> list = new ArrayList<Product>();
+			Map<Integer, Fornecedor> map = new HashMap<>();
+			
+			while(rs.next()) {
+				Fornecedor fornecedor = map.get(rs.getInt("FornecedorId"));
+				
+				if(fornecedor == null) {
+					fornecedor = instantiateFornecedor(rs);
+					
+					map.put(rs.getInt("FornecedorId"), fornecedor);
+				}
+				Product product = instantiateProduct(rs, fornecedor);
+				list.add(product);	
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+			DB.colseResultSet(rs);
+		}
+		
+		
 	}
 
 	private Product instantiateProduct(ResultSet rs, Fornecedor forn) throws SQLException {
