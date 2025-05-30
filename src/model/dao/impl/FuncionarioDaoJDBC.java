@@ -69,8 +69,8 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 		try {
 			st = conn.prepareStatement(
 					"UPDATE funcionario "
-					+ "SET Name = ?, BirthDate = ?, baseSalary = ?, CargoId = ? "
-					+ "WHERE Id = ?");
+					+ "SET Name = ?, BirthDate = ?, BaseSalary = ?, CargoId = ? "
+					+ "WHERE funcionario.Id = ?");
 			
 			st.setString(1, obj.getNome());
 			st.setDate(2, new Date(obj.getBirthDate().getTime()));
@@ -90,7 +90,22 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"DELETE FROM funcionario WHERE id = ?");
+			
+			st.setInt(1, id);
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected == 0) {
+				System.out.println("Linha não existe!");
+			}
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 		
 	}
 
@@ -174,7 +189,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 	
 	private Cargo instantiateCargo(ResultSet rs) throws SQLException {
 		Cargo cargo = new Cargo();
-		cargo.setId(rs.getInt("id"));
+		cargo.setId(rs.getInt("CargoId"));
 		cargo.setNome(rs.getString("CarName"));
 		return cargo;
 	}
