@@ -17,10 +17,15 @@ public class ProductTest {
 		
 		
 		
-		System.out.println("== Insert product ==");
-	Fornecedor fornecedor = new Fornecedor(2, "Matted", "1234", "matted@gmail.com");
-		Product product = new Product(null, "Massa Isabella", 500, 2000.0, new Date(20/06/2025) , fornecedor);
-		productDao.insert(product);
+		//System.out.println("== Insert product ==");
+		//Fornecedor fornecedor = new Fornecedor(2, "Matted", "1234", "matted@gmail.com");
+		//Product product = new Product(null, "Massa Isabella", 500, 2000.0, new Date(20/06/2025) , fornecedor);
+		//productDao.insert(product);
+		
+		//System.out.println("== findById product ==");
+		//Product prod = productDao.findById(1);
+		//System.out.println(prod);
+		
 		
 
 	}

@@ -77,10 +77,10 @@ public class ProductDaoJDBC implements ProductDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT product.*, fornecedor.name as ForName "
-					+ "FROM product INNER JOIN fornecedor"
-					+ "ON product.FornecedorId = fornecedor.id"
-					+ "WHERE id = ?");
+					"SELECT product.*, fornecedor.* "
+					+ "FROM product INNER JOIN fornecedor "
+					+ "ON product.FornecedorId = fornecedor.id "
+					+ "WHERE product.id = ?");
 			st.setInt(1, id);
 			
 			rs = st.executeQuery();
