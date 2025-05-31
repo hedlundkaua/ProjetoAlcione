@@ -47,8 +47,7 @@ public class ProductTest {
 		
 		//System.out.println("== Delete product ==");
 		//productDao.deleteById(4);
-		
-		
+			
 
 	}
 

@@ -114,7 +114,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT funcionario.*, cargo.Name as CarName "
+					"SELECT funcionario.*, cargo.Name as ByName "
 					+ "FROM funcionario INNER JOIN cargo "
 					+ "ON funcionario.CargoId = cargo.id "
 					+ "WHERE funcionario.id = ?");
@@ -148,7 +148,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT funcionario.*, cargo.name as CarName "
+					"SELECT funcionario.*, cargo.name as ByName "
 					+ "FROM funcionario INNER JOIN cargo "
 					+ "ON funcionario.CargoId = cargo.id "
 					+ "ORDER BY Name ");
@@ -159,7 +159,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 			Map<Integer, Cargo> map = new HashMap<>();
 			
 			while(rs.next()) {
-				Cargo cargo = map.get(rs.getInt("id"));
+				Cargo cargo = map.get(rs.getInt("CargoId"));
 				
 				if(cargo == null) {
 					cargo = instantiateCargo(rs);
@@ -189,8 +189,48 @@ public class FuncionarioDaoJDBC implements FuncionarioDao{
 	private Cargo instantiateCargo(ResultSet rs) throws SQLException {
 		Cargo cargo = new Cargo();
 		cargo.setId(rs.getInt("CargoId"));
-		cargo.setNome(rs.getString("CarName"));
+		cargo.setNome(rs.getString("ByName"));
 		return cargo;
+	}
+
+
+	@Override
+	public List<Funcionario> findByCargo(Cargo cargo) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT funcionario.*, cargo.name as ByName, cargo.* "
+					+ "FROM funcionario INNER JOIN cargo "
+					+ "ON funcionario.CargoId = cargo.id "
+					+ "WHERE CargoId = ?");
+			st.setInt(1, cargo.getId());
+			
+			rs = st.executeQuery();
+			
+				List<Funcionario> list = new ArrayList<>();
+				Map<Integer, Cargo> map = new HashMap<>();
+								
+				while(rs.next()) {
+					Cargo car = map.get(rs.getInt("CargoId"));
+					if(car == null) {
+						car = instantiateCargo(rs);
+						
+						map.put(rs.getInt("CargoId"), car);
+					}
+					Funcionario func = instatiateFuncionario(rs, car);
+					list.add(func);
+				}
+				return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+			DB.colseResultSet(rs);
+		}
+		
 	}
 	
 

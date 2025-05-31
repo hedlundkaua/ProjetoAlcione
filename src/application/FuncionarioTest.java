@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.FuncionarioDao;
+import model.entities.Cargo;
 import model.entities.Funcionario;
 
 public class FuncionarioTest {
@@ -12,19 +13,19 @@ public class FuncionarioTest {
 		FuncionarioDao funcionarioDao = DaoFactory.createFuncionarioDao();
 		
 		//System.out.println("== Insert funcionario ==");
-		//Cargo cargo = new Cargo(1, null);
-		//Funcionario funcionario = new Funcionario(null, "Joao", new Date(11/12/1972) , 1300.0, cargo);
+		Cargo cargo = new Cargo(3, null);
+		//Funcionario funcionario = new Funcionario(null, "Manoel", new Date(12/9/2006) , 2100.0, cargo);
 		//funcionarioDao.insert(funcionario);
 		
 		//System.out.println("== findById Funcionario ==");
 		//Funcionario newfun = funcionarioDao.findById(5);
 		//System.out.println(newfun);
 		
-		System.out.println("== findAll funcionario ==");
-		List<Funcionario> list = funcionarioDao.findAll();
-		for(Funcionario f : list) {
-			System.out.println(f);
-		}
+		//System.out.println("== findAll funcionario ==");
+		//List<Funcionario> list = funcionarioDao.findAll();
+		//for(Funcionario f : list) {
+		//	System.out.println(f);
+		//}
 		
 		//System.out.println("== Update funcionario ==");
 		//Funcionario fu = new Funcionario();
@@ -35,6 +36,10 @@ public class FuncionarioTest {
 		//System.out.println("== Delete funcionario ==");
 		//funcionarioDao.deleteById(2);	
 		
-		
+		System.out.println("== findByCargo");
+		List<Funcionario> list = funcionarioDao.findByCargo(cargo);
+		for(Funcionario f : list) {
+			System.out.println(f);
+		}
 	}
 }
